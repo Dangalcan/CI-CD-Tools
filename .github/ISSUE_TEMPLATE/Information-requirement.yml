@@ -3,16 +3,13 @@ description: "Create a new information requirement for your system."
 title: "NEW INFORMATION REQUIREMENT (Do not edit)"
 labels: [information-requirement]
 body:
-  - type: markdown
-    attributes:
-      value: "### INFORMATION REQUIREMENT\nThe system must store the following data about the specified entity."
 
   - type: input
     id: entity-name
     attributes:
       label: "Entity Name"
-      description: "Specify THE entity for which the system must store data. Please use a plural sustantive with or without starting with capital letter. Remember you can just specify one entity per information requirement issue."
-      placeholder: "e.g., Customers, products, Orders, users"
+      description: "Specify THE entity which has to be stored by the system. Remember that you should only specify one entity per information requirement issue."
+      placeholder: "Please use a plural sustantive (starting or not with capital letter). E.g., Customers, products, Orders, users"
     validations:
       required: true
 
@@ -20,7 +17,7 @@ body:
     id: data-fields
     attributes:
       label: "Data Fields"
-      description: "List the data fields  SEPARATED BY COMMAS that should be stored for this entity. Please just enter the names of the properties or the names and its types. In order to add tge type, use ':' and the wanted type "
-      placeholder: "e.g., Name, Date of Birth, Email or Name:String, Date of Birth:LocalDateTime, Email:String"
+      description: "List the data fields  SEPARATED BY COMMAS that this entity has. Please just enter the names of the properties. You can also include each property type. In order to add the type, use ':' and the wanted type "
+      placeholder: "e.g., Name, Date of Birth, Email, password:String, Date of married:Boolean, id:Integer"
     validations:
       required: true
