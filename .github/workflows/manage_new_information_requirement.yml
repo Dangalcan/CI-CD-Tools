@@ -1,0 +1,61 @@
+name: Manage New Information Requirement Issues
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  number-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Get issue count
+        id: count
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "all",
+              labels: "information-requirement"
+            });
+
+            const count = issues.length + 1;
+            const number = String(count).padStart(5, '0'); 
+            core.setOutput("number", number); 
+
+      - name: Rename issue and update body
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue_number = context.issue.number;
+            const new_title = `INFORMATION REQUIREMENT ${{ steps.count.outputs.number }}`;
+
+            const body = context.payload.issue.body || "";
+
+            const entityMatch = body.match(/### Entity Name\s*\n(.*?)\n/);
+            const entityName = entityMatch ? entityMatch[1].trim() : "Unknown Entity";
+
+            const fieldsMatch = body.match(/### Data Fields\s*\n([\s\S]*?)(?:\n|$)/);
+            const dataFieldsRaw = fieldsMatch ? fieldsMatch[1].trim() : "";
+
+            const dataFields = dataFieldsRaw
+              .split(',')
+              .map((field) => `+ ${field.trim()}`)
+              .join("\n");
+
+            const newBody = `The system must store the following data about ${entityName}:\n${dataFields}`;
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              title: new_title,
+              body: newBody
+            });
+
+            console.log("✅ Issue updated successfully!");

@@ -1,0 +1,26 @@
+name: "Information requirement"
+description: "Create a new information requirement for your system."
+title: "NEW INFORMATION REQUIREMENT (Do not edit)"
+labels: [information-requirement]
+body:
+  - type: markdown
+    attributes:
+      value: "### INFORMATION REQUIREMENT\nThe system must store the following data about the specified entity."
+
+  - type: input
+    id: entity-name
+    attributes:
+      label: "Entity Name"
+      description: "Specify THE entity for which the system must store data. Please use a plural sustantive with or without starting with capital letter. Remember you can just specify one entity per information requirement issue."
+      placeholder: "e.g., Customers, products, Orders, users"
+    validations:
+      required: true
+
+  - type: textarea
+    id: data-fields
+    attributes:
+      label: "Data Fields"
+      description: "List the data fields  SEPARATED BY COMMAS that should be stored for this entity. Please just enter the names of the properties or the names and its types. In order to add tge type, use ':' and the wanted type "
+      placeholder: "e.g., Name, Date of Birth, Email or Name:String, Date of Birth:LocalDateTime, Email:String"
+    validations:
+      required: true
