@@ -1,0 +1,23 @@
+name: "Information requirement"
+description: "Create a new information requirement for your system."
+title: "NEW INFORMATION REQUIREMENT (Do not edit)"
+labels: [information-requirement]
+body:
+
+  - type: input
+    id: entity-name
+    attributes:
+      label: "Entity Name"
+      description: "Specify THE entity which has to be stored by the system. Remember that you should only specify one entity per information requirement issue."
+      placeholder: "Please use a plural sustantive (starting or not with capital letter). E.g., Customers, products, Orders, users"
+    validations:
+      required: true
+
+  - type: textarea
+    id: data-fields
+    attributes:
+      label: "Data Fields"
+      description: "List the data fields  SEPARATED BY COMMAS that this entity has. Please just enter the names of the properties. You can also include each property type. In order to add the type, use ':' and the wanted type "
+      placeholder: "e.g., Name, Date of Birth, Email, password:String, Date of married:Boolean, id:Integer"
+    validations:
+      required: true
