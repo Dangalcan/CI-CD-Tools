@@ -1,0 +1,33 @@
+name: "Business rule"
+description: "Create a new business rule for your system."
+title: "NEW BUSINESS RULE (Do not edit)"
+labels: [business-rule]
+body:
+
+  - type: input
+    id: business-rule-name
+    attributes:
+      label: "Business rule name"
+      description: "Give a name to your business rule."
+      placeholder: "E.g., Free shipping cost to +40$ orders"
+    validations:
+      required: true
+
+  - type: textarea
+    id: business-rule-description
+    attributes:
+      label: "Business rule description"
+      description: "Describe your business rule precisely. Give all the details your want."
+      placeholder: "e.g. If someone order something above 40$ no shipping costs will be applied."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: "Acceptance criteria"
+      description: "Provide instructions to understand what you want to have as business rule."
+      placeholder: |
+        I'd like to avoid shipping costs in orders with more than 40$. If I buy something that costs 39$, I will have to pay shipping costs, but if I buy something that costs 40$ or more, I won't pay shipping costs. 
+    validations:
+      required: false
