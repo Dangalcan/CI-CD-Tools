@@ -1,0 +1,33 @@
+name: "Functional requirement"
+description: "Create a new functional requirement for your system."
+title: "NEW FUNCTIONAL REQUIREMENT (Do not edit)"
+labels: [functional-requirement]
+body:
+
+  - type: input
+    id: functional-requirement-name
+    attributes:
+      label: "Functional requirement name"
+      description: "Give a name to your functional requirement."
+      placeholder: "E.g., User login functionality"
+    validations:
+      required: true
+
+  - type: textarea
+    id: functional-requirement-description
+    attributes:
+      label: "Functional requirement description"
+      description: "Describe your functional requirement precisely. Provide all the relevant details."
+      placeholder: "e.g. Users must be able to log in with their email and password, and have the option to reset the password if forgotten."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: "Acceptance criteria"
+      description: "Provide clear criteria to ensure the functional requirement is fulfilled."
+      placeholder: |
+        The system must allow users to log in using their registered email and password. If a user forgets their password, there must be an option to reset it. The login screen should display error messages when incorrect credentials are entered, and successful login should redirect the user to the dashboard page.
+    validations:
+      required: false
