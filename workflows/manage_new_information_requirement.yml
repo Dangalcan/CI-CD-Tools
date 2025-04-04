@@ -1,4 +1,4 @@
-name: Manage New Information Requirement Issues
+name: Manage New Information Requirement
 
 on:
   issues:
