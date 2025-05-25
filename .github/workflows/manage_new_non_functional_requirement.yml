@@ -1,0 +1,48 @@
+name: Manage New Non Functional Requirement
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  number-issue:
+    runs-on: ubuntu-latest
+    if: contains(fromJSON(toJSON(github.event.issue.labels)).*.name, 'functional-requirement')
+    permissions:
+      issues: write
+    steps:
+      - name: Get functional requirement issue count
+        id: count
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "all",
+              labels: "non-functional-requirement"
+            });
+
+            const count = issues.length + 1;
+            const number = String(count).padStart(5, '0');
+            core.setOutput("number", number);
+
+      - name: Rename non functional requirement issue
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue_number = context.issue.number;
+            const new_title = `NON FUNCTIONAL REQUIREMENT ${{ steps.count.outputs.number }}`;
+            const current_body = context.payload.issue.body || "";
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              title: new_title,
+              body: current_body
+            });
+
+            console.log("✅ Non functional Requirement issue renamed successfully!");

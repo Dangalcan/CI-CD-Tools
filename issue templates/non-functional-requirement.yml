@@ -1,0 +1,33 @@
+name: "Non functional requirement"
+description: "Create a new non functional requirement for your system."
+title: "NEW NON FUNCTIONAL REQUIREMENT (Do not edit)"
+labels: [non-functional-requirement]
+body:
+
+  - type: input
+    id: non-functional-requirement-name
+    attributes:
+      label: "Non functional requirement name"
+      description: "Give a name to your non functional requirement."
+      placeholder: "E.g., Time response < 0.5 seconds"
+    validations:
+      required: true
+
+  - type: textarea
+    id: non-functional-requirement-description
+    attributes:
+      label: "Non functional requirement description"
+      description: "Describe your non functional requirement precisely. Provide all the relevant details."
+      placeholder: "e.g. The system must provide all the data in less than 0.5 seconds."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: "Acceptance criteria"
+      description: "Provide clear criteria to ensure the non functional requirement is fulfilled."
+      placeholder: |
+        Any request must be resolved in less than 0.5 seconds.
+    validations:
+      required: false
