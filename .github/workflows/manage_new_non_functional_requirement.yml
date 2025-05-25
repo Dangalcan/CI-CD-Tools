@@ -7,7 +7,7 @@ on:
 jobs:
   number-issue:
     runs-on: ubuntu-latest
-    if: contains(fromJSON(toJSON(github.event.issue.labels)).*.name, 'functional-requirement')
+    if: contains(fromJSON(toJSON(github.event.issue.labels)).*.name, 'non-functional-requirement')
     permissions:
       issues: write
     steps:
