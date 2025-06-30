@@ -92,6 +92,19 @@ jobs:
           echo -e "$RELEASE_NOTES" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
+      - name: Update CHANGELOG.md and .version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: | 
+          (cat release_notes.md; echo; cat CHANGELOG.md) > temp && mv temp CHANGELOG.md
+          echo "${GITHUB_REF#refs/tags/}" > .version
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          git add .version
+          git commit -m "chore: update both CHANGELOG.md and update .version for ${{ github.ref_name }}"
+          git push
+
       - name: Create release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
